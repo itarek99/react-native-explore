@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
+import TaskInput from './components/TaskInput';
+import TaskItem from './components/TaskItem';
 
 export default function App() {
+  const [taskList, setTaskList] = useState([]);
+  const [taskText, setTaskText] = useState('');
+
+  const taskInputHandler = (taskText) => {
+    setTaskText(taskText);
+  };
+  const addTaskHandler = () => {
+    setTaskList((prevState) => [{ text: taskText, key: Date.now() }, ...prevState]);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.appContainer}>
+      <TaskInput addTaskHandler={addTaskHandler} taskInputHandler={taskInputHandler} />
+      <View style={styles.taskContainer}>
+        <FlatList
+          data={taskList}
+          renderItem={(itemData) => {
+            return <TaskItem itemData={itemData} />;
+          }}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 16,
+    paddingTop: 50,
+  },
+
+  taskContainer: {
+    marginTop: 24,
+    borderTopColor: '#333',
+    borderTopWidth: 1,
+    paddingTop: 24,
   },
 });
