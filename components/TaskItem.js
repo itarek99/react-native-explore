@@ -2,23 +2,24 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 const TaskItem = ({ itemData, deleteTaskHandler }) => {
   return (
-    <Pressable onPress={() => deleteTaskHandler(itemData.item.key)}>
-      <View style={styles.taskItem}>
+    <View style={styles.taskItem}>
+      <Pressable android_ripple={{ color: '#dddddd' }} onPress={() => deleteTaskHandler(itemData.item.key)}>
         <Text style={styles.taskText}>{itemData.item.text}</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 export default TaskItem;
 
 const styles = StyleSheet.create({
   taskItem: {
-    padding: 8,
-    backgroundColor: 'seagreen',
-    marginBottom: 8,
+    backgroundColor: '#46529C',
+    marginBottom: 12,
+    borderRadius: 3,
   },
 
   taskText: {
+    padding: 12,
     color: '#fff',
   },
 });
