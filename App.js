@@ -12,6 +12,7 @@ export default function App() {
   };
   const addTaskHandler = () => {
     setTaskList((prevState) => [{ text: taskText, key: Date.now() }, ...prevState]);
+    setTaskText('');
   };
 
   return (
