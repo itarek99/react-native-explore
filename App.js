@@ -15,14 +15,19 @@ export default function App() {
     setTaskText('');
   };
 
+  const deleteTaskHandler = (key) => {
+    const items = taskList.filter((item) => item.key !== key);
+    setTaskList(items);
+  };
+
   return (
     <View style={styles.appContainer}>
-      <TaskInput addTaskHandler={addTaskHandler} taskInputHandler={taskInputHandler} />
+      <TaskInput addTaskHandler={addTaskHandler} taskInputHandler={taskInputHandler} taskText={taskText} />
       <View style={styles.taskContainer}>
         <FlatList
           data={taskList}
           renderItem={(itemData) => {
-            return <TaskItem itemData={itemData} />;
+            return <TaskItem itemData={itemData} deleteTaskHandler={deleteTaskHandler} />;
           }}
         />
       </View>

@@ -1,9 +1,9 @@
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 
-const TaskInput = ({ taskInputHandler, addTaskHandler }) => {
+const TaskInput = ({ taskInputHandler, addTaskHandler, taskText }) => {
   return (
     <View style={styles.inputContainer}>
-      <TextInput onChangeText={taskInputHandler} style={styles.textInput} placeholder='task title' />
+      <TextInput value={taskText} onChangeText={taskInputHandler} style={styles.textInput} placeholder='task title' />
       <View style={styles.buttonContainer}>
         <Button onPress={addTaskHandler} title='Add Task' />
       </View>
